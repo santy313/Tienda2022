@@ -1,0 +1,391 @@
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: url(../img/bg.jpeg) no-repeat center top;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+body {
+    margin: 0;
+}
+
+
+.main {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+/* .container_producto{
+    
+} */
+
+.container_cesta {
+    border: solid 5px #000;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 30%;
+}
+
+/*---------- PAGINA INCIO LOGING ----------*/
+.login-box {
+    width: 320px;
+    height: 420px;
+    background: #000;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.login-box .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+
+.login-box h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.login-box label {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+}
+
+.login-box input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.login-box input[type="text"], .login-box input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.login-box input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #b80f22;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.login-box input[type="submit"]:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+
+.login-box a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+}
+
+.login-box a:hover {
+    color: #fff;
+}
+
+/*---------- estilo product ----------*/
+.main-header {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 2%;
+    /*    padding-left: 1%;
+        padding-bottom: 1%;*/
+    margin: 2%;
+    border-radius: 5px;
+}
+
+.main-header__title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 10px 0;
+}
+
+.main-header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header__btn {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    border: solid 1px #454546;
+    text-decoration: none;
+}
+
+.main-header__input {
+    display: block;
+    padding: 10px;
+}
+
+/*---------- ESTILO CONTAINER DE LOS PRODUCTOS ----------*/
+.container-productos {
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: dense;
+    grid-auto-rows: auto;
+    /* grid-template-columns: repeat(auto-fit, minmax(min(100%,15rem), 1fr)); */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+}
+
+.product {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: solid 1px #ccc;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+
+.product__img {
+    width: 60%;
+    /*object-fit: cover;*/
+    border-radius: 10%;
+}
+
+
+/*---------- ESTILO PAGINA DE LA CESTA ----------*/
+.contenedorCesta {
+    background-color: #ccc;
+}
+
+.tablaProductos {
+    background-color: rgba(255, 255, 255, 0.8);
+    /*background-color: white;*/
+    width: 100%;
+    margin: 0 -1px 24px 0;
+    text-align: left;
+    border-collapse: separate;
+    border-radius: 5px;
+    display: table;
+    text-indent: initial;
+}
+
+.tablaProductos thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.tablaProductos tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.tablaProductos tbody tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.tablaProductos thead th {
+    font-weight: 700;
+    padding: 9px 12px;
+    line-height: 1.5em;
+}
+
+.tablaProductos tbody td {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    padding: 9px 12px;
+    vertical-align: middle;
+    line-height: 1.5em;
+}
+
+/*---------- ESTILO PAGINA DE LA CESTA3 ----------*/
+.containerCesta {
+    display: block;
+    padding: 1%;
+}
+
+.tablaCesta {
+    background-color: rgba(255, 255, 255, 0.8);
+    /*background-color: white;*/
+    width: 100%;
+    margin: 0 -1px 24px 0;
+    text-align: left;
+    border-collapse: separate;
+    border-radius: 5px;
+    display: table;
+    text-indent: initial;
+}
+
+.tablaCesta thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.tablaCesta tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.tablaCesta tbody tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.tablaCesta thead th {
+    font-weight: 700;
+    padding: 9px 12px;
+    line-height: 1.5em;
+}
+
+.tablaCesta tbody td {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    padding: 9px 12px;
+    vertical-align: middle;
+    line-height: 1.5em;
+}
+
+.imgCesta {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10%;
+}
+
+.pruduct__title {
+    text-align: center;
+}
+
+.pruduct__price {
+    font-size: 200px;
+    color: #FF4E00;
+    font-weight: bold;
+}
+
+.product__cod {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.pruduct_icon {
+    display: block;
+    /*margin: 200px 0;*/
+    border: solid 1px #000;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+/*---------- ESTILO INPUTS ----------*/
+input[type=submit],
+input[type=reset],
+input[type=button] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin: 10px;
+    width: 60%;
+}
+
+input[type=submit]:hover,
+input[type=reset]:hover,
+input[type=button]:hover {
+    /*background-color: #45a049;*/
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+input[type=text],
+input[type='number'] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+/*---------- ESTILO PIE DE PAGINA ----------*/
+.pie{
+    min-height: 60px;
+    background-color: #ccc;
+}
+
+/*---------- ESTILO PAGINA DE PAGADO----------*/
+#title{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    perspective-origin:50% 50%;
+    perspective:700px;
+}
+h1{
+    text-align:center;
+    font-size:12vmin;
+    font-family: 'Open Sans', sans-serif;
+    color:rgba(0,0,0,0.8);
+    line-height:1em;
+    transform:rotateY(50deg);
+    transition:transform 2s;
+    perspective:150px;
+    perspective-origin:0% 50%;
+}
+h1:hover{
+    transform:rotateY(-20deg);
+}
+h1:after{    
+    position:absolute;
+    left:0;top:0;
+    transform-origin:50% 100%;
+    transform:rotateX(-90deg);
+    color:#0099CC;
+}
+#title:before{
+    content:'';
+    position:absolute;
+    top:-150%; left:-25%;
+    width:180%; height:328%;
+    background:rgba(255,255,255,0.7);  
+    transform-origin: 0 100%;
+    transform: translatez(-200px) rotate(40deg) skewX(35deg);
+    border-radius:0 0 100% 0;
+    animation:light 5s;
+}
+@keyframes light{
+    from{opacity:0;}
+    to{opacity:1;}
+}

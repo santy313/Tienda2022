@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 $mensaje = "";
 
@@ -21,8 +20,8 @@ if (isset($_POST['btnAccion'])) {
                     $mensaje = 'Upss... nombre incorrecto';
                }
                // CANTIDAD
-               if (is_numeric(openssl_decrypt($_POST['cantidad'], COD, KEY))) {
-                    $CANTIDAD = openssl_decrypt($_POST['cantidad'], COD, KEY);
+               if (is_numeric($_POST['cantidad'])) {
+                    $CANTIDAD = $_POST['cantidad'];
                     $mensaje = 'OK cantidad correcto ' . $CANTIDAD;
                } else {
                     $mensaje = 'Upss... cantidad incorrecto';
@@ -35,7 +34,12 @@ if (isset($_POST['btnAccion'])) {
                     $mensaje = 'Upss... precio incorrecto';
                }
 
-               if (!isset($_SESSION['CARRITO'])) { // si no tiene nada
+
+
+
+               // CARRITO -------------------------------------------------
+
+               if (isset($_SESSION['CARRITO'])) { // Validar si tenemos una variable de sesion                    
                     $producto = array(
                          'ID' => $id,
                          'NOMBRE' => $NOMBRE,
@@ -43,17 +47,45 @@ if (isset($_POST['btnAccion'])) {
                          'PRECIO' => $PRECIO
                     );
                     $_SESSION['CARRITO'][0] = $producto;
+                    $mensaje = "1. Producto agragado al carrito   ";
                } else {
-                    $NumeroProducto = count($_SESSION['CARRITO']);
-                    $producto = array(
-                         'ID' => $id,
-                         'NOMBRE' => $NOMBRE,
-                         'CANTIDAD' => $CANTIDAD,
-                         'PRECIO' => $PRECIO
-                    );
-                    $_SESSION['CARRITO'][$NumeroProducto] = $producto;
+                         $producto = array(
+                              'ID' => $id,
+                              'NOMBRE' => $NOMBRE,
+                              'CANTIDAD' => $CANTIDAD,
+                              'PRECIO' => $PRECIO
+                         );
+                         $_SESSION['CARRITO'][0] = $producto;
+                    
+                    // $mensaje = "<pre>" . print_r($arreglo, true) . "</pre>";
                }
-               //$mensaje = print_r($_SESSION, true); //ver la infomracion de lo que enviar pruebas
+               //
+               //
+               //
+               //
+               // $mensaje = "<pre>" . print_r($_SESSION, true) . "</pre>"; //ver la infomracion de lo que enviar pruebas
+               //
+               //               
+               break;
+          case 'Eliminar':
+               //
+               // $mensaje = "<pre>" . print_r($_SESSION, true) . "</pre>";
+               ////////
+               //
+               //
+               // ID
+               if (is_numeric(openssl_decrypt($_POST['id'], COD, KEY))) {
+                    $ID = openssl_decrypt($_POST['id'], COD, KEY);
+
+                    foreach ($_SESSION['CARRITO'] as $indice => $producto) {
+                         if ($producto['ID'] == $ID) {
+                              unset($_SESSION['CARRITO'][$indice]);
+                              echo "<scrip> alert('elemento borrado...');</scrip>";
+                         }
+                    }
+               } else {
+                    $mensaje = 'Upss... ID incorrecto';
+               }
                break;
      }
 }

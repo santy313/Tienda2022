@@ -1,6 +1,9 @@
+<?php if (!isset($_SESSION['usuario'])) {
+     header("Location: ./Login.php");
+ }
+ ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +17,7 @@
 
 <body>
      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-          <a class="navbar-brand">Logo de la Empresa</a>
+          <a class="navbar-brand">Logo de la Empresa</a>          
           <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
           </button>
@@ -27,12 +30,15 @@
                          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Karts</a>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link disabled" href="mostrarCarrito.php" tabindex="-1" aria-disabled="true">Carrito (<?php echo (empty($_SESSION['CARRITO'])) ? 0 : count($_SESSION['CARRITO']) //pregunta si sesion carrito tiene algo, si contesta si if ternario si es cero contavilizo cuanto tiene.
-                                                                                                                             ?>)</a>
+                         <a class="nav-link disabled" href="mostrarCarrito.php" tabindex="-1" aria-disabled="true">Carrito (<?php echo (empty($_SESSION['CARRITO'])) ? 0 : count($_SESSION['CARRITO']) //pregunta si sesion carrito tiene algo, si contesta si if ternario si es cero contavilizo cuanto tiene.                                                                                                                             ?>)</a>
+                    </li>
+                    <li class="nav-item">
+                         <a class="nav-link disabled" href="templates/logoff.php" tabindex="-1" aria-disabled="true">Cerrar Sesion</a>
                     </li>
                </ul>
           </div>
-     </nav>
+          
+     </nav>     
      <br />
      <br />
      <div class="container">
