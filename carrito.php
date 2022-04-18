@@ -1,7 +1,6 @@
 <?php
 session_start();
 $mensaje = "";
-
 if (isset($_POST['btnAccion'])) {
     switch ($_POST['btnAccion']) {
         case 'Agregar':
@@ -56,24 +55,9 @@ if (isset($_POST['btnAccion'])) {
                     'PRECIO' => $PRECIO
                 );
                 $_SESSION['CARRITO'][0] = $producto;
-
-                // $mensaje = "<pre>" . print_r($arreglo, true) . "</pre>";
             }
-            //
-            //
-            //
-            //
-            // $mensaje = "<pre>" . print_r($_SESSION, true) . "</pre>"; //ver la infomracion de lo que enviar pruebas
-            //
-            //               
             break;
         case 'Eliminar':
-            //
-            // $mensaje = "<pre>" . print_r($_SESSION, true) . "</pre>";
-            ////////
-            //
-            //
-            // ID
             if (is_numeric(openssl_decrypt($_POST['id'], COD, KEY))) {
                 $ID = openssl_decrypt($_POST['id'], COD, KEY);
 
