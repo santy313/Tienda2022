@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['rol'])) {
-    header("Location: ./Login.php");
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ./login.php");
 }
 ?>
 <!DOCTYPE html>
@@ -10,6 +10,7 @@ if (!isset($_SESSION['rol'])) {
     <body>
         <?php include './templates/menu.php'; ?>
         <div class="container">
+            swal("Here's a message!");
             <?php
             // put your code here
             ?>

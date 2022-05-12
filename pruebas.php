@@ -1,13 +1,38 @@
 <?php
-
-include './global/conexion.php';
-$conexion = abrir_conexion_mysqli();
-$sql = 'SELECT * FROM `productos`';
-$resultado = $conexion->query($sql);
-$regreso;
-while ($mostrar = $resultado->fetch_array(MYSQLI_ASSOC)){
-    $regreso[$mostrar['ID']]=$mostrar;    
-}
-echo '<pre>';
-print_r($regreso);
-echo '</pre>';
+include 'global/conexion.php';
+include './global/funcionesBBDD.php';
+?>
+<!doctype html>
+<html lang="en">
+    <head>
+        <?php include './templates/cabecera.php'; ?>        
+    </head>
+    <body>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Nº Kart</th>
+                    <th>Categoria</th>
+                    <th>Tiempos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- CARGA DE MEJORES TIEMPOS -->                
+                    <?php
+                    $listaTiempos = cargarTiempoPersonal(2);
+                    print_r($listaTiempos);
+                    foreach ($listaTiempos as $indice => $tiempos) {
+                        echo '<br>: '.$tiempos['Nombre'].'<br>';
+                        ?>                        
+                        <td><?php echo $tiempos['Nombre'] ?></td>                        
+                    <?php } ?>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                </tr>                                    
+            </tbody>
+        </table>
+    </body>
+</html>

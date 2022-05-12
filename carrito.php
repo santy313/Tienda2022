@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 $mensaje = "";
 if (isset($_POST['btnAccion'])) {
     switch ($_POST['btnAccion']) {
@@ -32,9 +32,6 @@ if (isset($_POST['btnAccion'])) {
             } else {
                 $mensaje = 'Upss... precio incorrecto';
             }
-
-
-
 
             // CARRITO -------------------------------------------------
 
