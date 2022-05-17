@@ -1,5 +1,4 @@
 <?php
-
 define("KEY", "@ProyectoFinal2022");
 define("COD", "AES-128-ECB");
 

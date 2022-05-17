@@ -3,8 +3,8 @@ session_start();
 if (!isset($_SESSION['usuario'])) {
     header("Location: ./login.php");
 }
-include 'global/conexion.php';
-include 'global/funcionesBBDD.php';
+require_once 'global/conexion.php';
+require_once 'global/funcionesBBDD.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,27 +24,30 @@ include 'global/funcionesBBDD.php';
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="pills-product-tab" data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-product" aria-selected="false">Tiempos</a>
                         </li>
-                        <li class="nav-item" role="presentation">
+<!--                        <li class="nav-item" role="presentation">
                             <a class="nav-link" id="pills-news-tab" data-toggle="pill" href="#pills-news" role="tab" aria-controls="pills-news" aria-selected="false">News</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
-                        </li>
+                        </li>-->
                     </ul>                    
                 </div>
-                <!-- INICIO DATOS PERSONALES-->
+                <!-- INICIO DATOS PERSONALES-->               
 
                 <div class="tab-content p-2" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-company" role="tabpanel" aria-labelledby="pills-company-tab">
                         <div class="container-fluid">                            
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="card" style="width: 18rem;">                                        
+                                    <div class="card" style="width: 18rem;">
+                                        <?php
+                                        $cliente = cargarDatosCliente($_SESSION['usuario']['IdUsuario']);                                        
+                                        ?>
                                         <ul class="list-group list-group-flush">
-                                            <li class="font-weight-bold list-group-item">Nombre: <?php echo strtoupper($_SESSION['usuario']['nombre']); ?></li>
-                                            <li class="font-weight-bold list-group-item">Apellido: <?php echo strtoupper($_SESSION['usuario']['apellido']); ?></li>
-                                            <li class="font-weight-bold list-group-item">Usuario: <?php echo strtoupper($_SESSION['usuario']['user_name']); ?> </li>
-                                            <li class="font-weight-bold list-group-item">Contraseña: <?php echo desencriptar($_SESSION['usuario']['user_pass']); ?> </li>
+                                            <li class="font-weight-bold list-group-item">Nombre: <?php echo strtoupper($cliente['nombre']); ?></li>
+                                            <li class="font-weight-bold list-group-item">Apellido: <?php echo strtoupper($cliente['apellido']); ?></li>
+                                            <li class="font-weight-bold list-group-item">Usuario: <?php echo strtoupper($cliente['user_name']); ?> </li>
+                                            <li class="font-weight-bold list-group-item">Contraseña: <?php echo desencriptar($cliente['user_pass']); ?> </li>
                                         </ul>                                    
                                     </div>
                                 </div>
@@ -55,6 +58,7 @@ include 'global/funcionesBBDD.php';
                                             <div class="form-group col-md-6">
                                                 <label for="login">LOGIN </label>
                                                 <input type="text" class="form-control" name="userName" id="login">
+                                                <input type="hidden" value=" <?php echo $_SESSION['usuario']['IdUsuario']; ?>" name='idUsuario'>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="contrasenha">CONTRASEÑA</label>
@@ -71,10 +75,10 @@ include 'global/funcionesBBDD.php';
                                                 <input type="text" class="form-control" name="apellido" id="apellido">
                                             </div>
                                         </div>                                
-                                        <legend>Mejor Tiempo </legend>
+                                        <legend>Mejor Tiempo </legend>                                        
                                         <div class="form-row">
                                             <div class="form-group col-md-6">                            
-                                                <input type="text" class="form-control" id="mejorTiempo" disabled="false" value="<?php echo $_SESSION['usuario']['mejorTiempo']; ?>" placeholder="<?php echo $_SESSION['usuario']['mejorTiempo']; ?>" >
+                                                <input type="text" class="form-control" id="mejorTiempo" disabled="false" placeholder="<?php echo cargarMejorTiempoPersonal(cargarTiemposPersonal($_SESSION['usuario']['IdUsuario'])) ?>" >
                                             </div>                    
                                         </div>                                
                                         <!-- Button trigger modal -->
@@ -97,7 +101,7 @@ include 'global/funcionesBBDD.php';
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>                                                
-                                                        <button type="submit" class="btn btn-primary" name="editar_cliente" value="aceptar">OK</button>                                                
+                                                        <button type="submit" class="btn btn-primary" name="editar_cliente" value="aceptar">OK</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -123,6 +127,7 @@ include 'global/funcionesBBDD.php';
                                                 <th>Nº KART</th>                                                
                                                 <th>TIEMPOS</th>
                                                 <th>FECHA</th>
+                                                <th>BORRAR</th>
                                             </tr>
                                         </thead>
                                         <tbody>                                    
@@ -136,30 +141,56 @@ include 'global/funcionesBBDD.php';
                                                     <td><?php echo $tiempos['nombreKarts'] ?></td>                                                    
                                                     <td><?php echo conversorSegundosHoras($tiempos['mejorTiempo']); ?></td>
                                                     <td><?php echo $tiempos['fechaRecord'] ?></td>
+                                                    <td>
+                                                        <form  action="./formularios/tiempos.php" method="POST">
+                                                            <input type="hidden" name="idMejorTiempo" value="<?php echo encriptar($tiempos['IdRecord']) ?>">
+                                                            <button type="submit" class="btn btn-primary" name="borrar_tiempo" value="aceptar">X</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             <?php } ?>                                    
                                         </tbody>
                                     </table>
                                     <!--FIN TABLA MEJORES TIEMPOS-->
                                 </div>
+                                <!-- AÑADIR UN NUEVO TIEMPO -->
                                 <div class="col-md-4">
                                     <h3 class="mb-3 font-weight-bold">Añadir Nuevo Tiempo</h3>
-                                    <form>
+                                    <!-- ERROR SI NO SE INTRODUCE DATOS PARA AÑADIR NUEVO TIEMPO -->
+                                    <?php
+                                    if (isset($error)) {
+                                        echo $error;
+                                    }
+                                    ?>
+                                    <!-- FIN ERROR SI NO SE INTRODUCE DATOS PARA AÑADIR NUEVO TIEMPO -->
+                                    <form action="./formularios/tiempos.php" method="POST">
                                         <div class="form-group">
-                                            <label for="nombre">NOMBRE </label>
-                                            <input type="text" class="form-control" id="nombreTiempo">
+                                            <label for="nombre">NICK NAME</label>
+                                            <input type="text" class="form-control" name="nombreTiempo">
+                                            <input type="hidden" name='idUsuario' value="<?php echo encriptar($_SESSION['usuario']['IdUsuario']); ?>" >
+                                            <input type="hidden" name='user_name' value="<?php echo $_SESSION['usuario']['user_name']; ?>" >
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlSelect1">Example select</label>
-                                            <select class="form-control" id="exampleFormControlSelect1">
+                                            <select class="form-control" name="numeroKarts">
                                                 <?php mostrarSelectMysql("nombreKarts", "kart"); ?> 
                                             </select>
-                                        </div>                                        
-                                    </form>
-                                    <p>Participante</p>                                    
-                                    <p>Mejor Tiempo</p>
-                                    <p>Fecha</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nuevoTiempo">Nuevo Tiempo </label>
+                                            <div>
+                                                <label for="minutos">Minutos: </label>
+                                                <input type="number" value="1" min="0" max="59" name="minutos" placeholder="1">
+                                                <label for="segundos">Segundos: </label>
+                                                <input type="number" value="0" min="0" max="59" name="segundos" placeholder="0">
+                                            </div>                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary" name="nuevo_tiempo" value="aceptar">OK</button>
+                                        </div>
+                                    </form>                                                           
                                 </div>
+                                <!-- FIN AÑADIR UN NUEVO TIEMPO -->
                             </div>
                         </div>                        
                     </div>
