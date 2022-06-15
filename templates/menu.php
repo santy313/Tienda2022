@@ -1,6 +1,7 @@
 <div class="nav-scroller py-2 mb-3">
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-        <a class="navbar-brand">Logo de la Empresa</a>
+        <a class="navbar-brand"><img src="http://localhost/Tienda2022/img/logo2.png"  height="50" alt=""></a>
+        
         <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

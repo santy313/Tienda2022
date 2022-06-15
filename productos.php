@@ -5,6 +5,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 include 'global/conexion.php';
 include './global/funcionesBBDD.php';
+include './global/funcionesProductos.php';
 include 'carrito.php';
 ?>
 <!DOCTYPE html>
